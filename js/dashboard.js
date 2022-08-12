@@ -54,7 +54,7 @@
       }
     }
   })
-
+/*
   const ctx2 = document.getElementById('myChart2')
   const myChart2 = new Chart(ctx2, {
     type: 'pie',
@@ -84,13 +84,15 @@
           ticks: {
             beginAtZero: false
           }
-        }]*/
+        }]
       },
       legend: {
         display: false
       }
     }
-  })
+  })*/
+
+
   const ctx3 = document.getElementById('myChart3')
   const myChart3 = new Chart(ctx3, {
     type: 'pie',

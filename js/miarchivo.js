@@ -1,8 +1,12 @@
 // Mensaje de informacion
 alert(
 `Se ingresan en automaticamente 9 gastos en 3 categorias diferentes para facilitar pruebas y visualizacion.
-        
-Se agrega interaccion con HTML:
+ 
+Se agregan eventos:
+- Los botones se encuentran manejados por eventos onclick declarados en .js
+- Al hacer click sobre fila de tabla, se visualiza en canvas el Valor correspondiente a la fila seleccionada
+
+Interaccion con HTML:
 - Se puede ingresar un nuevo gasto desde el Formularo
 - La tabla Detalle gasto visualiza los gastos ingresados
 - Boton 'Reset Gastos', elimina gastos ingresados y elimina contenido de la tabla
@@ -17,6 +21,8 @@ let promedio = 0;
 let gasto_max = 0;
 let gasto_min = 0;
 let ID_GASTO_GLOBAL = 0;
+let selectedFecha;
+let selectedValue;
 
 //Def array para almacenar objetos creados de clase Gasto
 let arrayGastos = [];
@@ -104,9 +110,17 @@ function addRowTable(objeto){
         // creo nodo fila
         nodofila = document.createElement("tr");
         nodofila.id= objeto.ID; 
+
+        // evento onclick en cada fila
+        let index = arrayGastos.length -1;
+        nodofila.onclick = () =>{
+                //objeto.deleteCompleteRow();
+                //arrayGastos.splice(index,1);
+                updateCanvas(objeto);
+        }
         tableElements.appendChild(nodofila);
 
-        // creo nodo celda para index de array de gastos
+        // creo nodo celda indicacion numero de fila visualizada (no tabla)
         let nodo_index =document.createElement('td');
         nodo_index.innerText=`${arrayGastos.length}`;
         nodofila.appendChild(nodo_index);
@@ -222,3 +236,29 @@ for(let i=6;i<9;i++)
     arrayGastos.push(nuevoGasto);
     addRowTable(nuevoGasto);
 }
+
+//Declaracion de Eventos
+
+let btmInputExpenseForm = document.getElementById("btmInputExpenseForm");
+btmInputExpenseForm.onclick = () =>{crearGasto()};
+
+let btmMostrarCalculos = document.getElementById("btmMostrarCalculos");
+btmMostrarCalculos.onclick = () =>{mostrarCalculos()};
+
+let btmFiltrar = document.getElementById("btmFiltrar");
+btmFiltrar.onclick = () =>{filtrar()};
+
+let btmReset= document.getElementById("btmReset");
+btmReset.onclick = () =>{resetGastos()};
+
+//funcion que actualiza canvas
+
+function updateCanvas(objeto){
+    let canvas = document.getElementById("textSelectedRow");
+    let context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.font = "40px Arial";
+    context.fillText(`$ ${objeto.valor}`, 100, 50);
+}
+
+
