@@ -4,7 +4,7 @@ alert(
  
 Se agregan eventos:
 - Los botones se encuentran manejados por eventos onclick declarados en .js
-- Al hacer click sobre fila de tabla, se visualiza en canvas el Valor correspondiente a la fila seleccionada
+- Al hacer pasar el mouse por la tabla, se visualiza en canvas el valor correspondiente a la fila en la que se encuentra el mouse.
 
 Interaccion con HTML:
 - Se puede ingresar un nuevo gasto desde el Formularo
@@ -111,9 +111,9 @@ function addRowTable(objeto){
         nodofila = document.createElement("tr");
         nodofila.id= objeto.ID; 
 
-        // evento onclick en cada fila
+        // evento onmouseenter en cada fila
         let index = arrayGastos.length -1;
-        nodofila.onclick = () =>{
+        nodofila.onmouseenter = () =>{
                 //objeto.deleteCompleteRow();
                 //arrayGastos.splice(index,1);
                 updateCanvas(objeto);
